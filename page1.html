@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Web Escape | Page 1</title>
+
+<style>
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Courier New', monospace;
+}
+
+/* BACKGROUND */
+body {
+  height: 100vh;
+  background: url("./images/page1 bg.png") no-repeat center center/cover;
+  overflow: hidden;
+  position: relative;
+}
+
+/* FLICKER EFFECT */
+.flicker {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  animation: flicker 0.15s infinite alternate;
+  pointer-events: none;
+  z-index: 1;
+}
+
+@keyframes flicker {
+  0% { opacity: 0.25; }
+  100% { opacity: 0.5; }
+}
+
+/* STORY */
+.story-box {
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(227, 144, 109, 0.436);
+  padding: 25px 35px;
+  /*border: 2px solid red;*/
+  color: white;
+  text-align: center;
+  z-index: 2;
+}
+
+.story-box h1 {
+  color: red;
+  margin-bottom: 15px;
+}
+
+.story-box span {
+  color: gold;
+}
+
+.hint {
+  margin-top: 10px;
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+/* BULBS */
+.bulb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #222;
+  position: absolute;
+  box-shadow: none;
+  z-index: 2;
+}
+
+/* RANDOM POSITIONS */
+.b1 { top: 25%; left: 30%; }
+.b2 { top: 28%; left: 34.5%; }
+.b3 { top: 30%; left: 38.5%; }
+.b4 { top: 31%; left: 42.5%; }
+.b5 { top: 32%; left: 46%; }
+.b6 { top: 31%; left: 51.5%; }
+.b7 { top: 30%; left: 56%; }
+.b8 { top: 29%; left: 61%; }
+.b9 { top: 28%; left: 65.5%; }
+.b10 { top: 26.5%; left: 70.5%; }
+
+/* BULB ON */
+.bulb.on {
+  background: gold;
+  box-shadow: 0 0 15px gold, 0 0 30px orange;
+  animation: glow 1s infinite alternate;
+}
+
+@keyframes glow {
+  from { opacity: 0.6; }
+  to { opacity: 1; }
+}
+
+/* ESCAPE BUTTON */
+.escape {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 12px 30px;
+  background: red;
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+  letter-spacing: 2px;
+  border-radius: 5px;
+  opacity: 0.2;
+  pointer-events: none;
+  z-index: 3;
+  transition: 0.4s;
+}
+
+.escape.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+</style>
+</head>
+
+<body>
+
+<div class="page lights-locked" id="page">
+
+  <!-- Flicker -->
+  <div class="flicker"></div>
+
+  <!-- Story -->
+  <div class="story-box">
+    <h1>The Flickering Basement</h1>
+    <p>
+      You wake up in the Byers' basement.<br>
+      The lights flicker violently.<br>
+      Joyce left a message:<br>
+      <span>“Find the light to escape.”</span>
+    </p>
+    <p class="hint">
+      The door reacts only when everything is fixed…
+    </p>
+  </div>
+
+  <!-- BULBS -->
+  <div class="bulb b1"></div>
+  <div class="bulb b2"></div>
+  <div class="bulb b3"></div>
+  <div class="bulb b4"></div>
+  <div class="bulb b5"></div>
+  <div class="bulb b6"></div>
+  <div class="bulb b7"></div>
+  <div class="bulb b8"></div>
+  <div class="bulb b9"></div>
+  <div class="bulb b10"></div>
+
+  <!-- ESCAPE -->
+  <a href="page2.html" class="escape" id="escapeBtn">ESCAPE</a>
+
+</div>
+
+<script>
+/*
+  REAL ENFORCEMENT LOGIC
+  =====================
+  Escape unlocks ONLY IF:
+  1. All bulbs have class "on"
+  2. Page does NOT have class "lights-locked"
+*/
+
+function checkEscapeConditions() {
+  const bulbs = document.querySelectorAll('.bulb');
+  const page = document.getElementById('page');
+  const escapeBtn = document.getElementById('escapeBtn');
+
+  const allLightsOn = [...bulbs].every(b => b.classList.contains('on'));
+  const pageUnlocked = !page.classList.contains('lights-locked');
+
+  if (allLightsOn && pageUnlocked) {
+    escapeBtn.classList.add('active');
+  } else {
+    escapeBtn.classList.remove('active');
+  }
+}
+
+/* Run check repeatedly (DevTools friendly) */
+setInterval(checkEscapeConditions, 300);
+</script>
+
+</body>
+</html>

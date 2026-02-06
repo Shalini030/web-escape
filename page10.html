@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>WEB ESCAPE | FINAL STAGE</title>
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: url("./images/page10 bg.png") no-repeat center/cover;
+      font-family: 'Courier New', monospace;
+      color: #e50914;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .container {
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 3rem;
+      letter-spacing: 3px;
+      text-shadow: 0 0 10px red;
+    }
+
+    input {
+      padding: 12px;
+      width: 280px;
+      background: #000;
+      border: 2px solid #e50914;
+      color: #e50914;
+      font-size: 1rem;
+      text-align: center;
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 10px 25px;
+      background: #e50914;
+      color: #000;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .msg {
+      margin-top: 15px;
+      height: 20px;
+      color: #ccc;
+    }
+
+    /* What if the answer is upside down? */
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <h1>THE FINAL GATE</h1>
+    <p>The truth hides in plain sight.</p>
+
+    <input type="text" id="key" placeholder="Enter the final key">
+    <br>
+    <button onclick="verify()">UNLOCK</button>
+
+    <div class="msg" id="msg"></div>
+  </div>
+
+  <script>
+    console.log("Try looking at it upside down.");
+
+    // Visible but reversed
+    const hidden = "NWOD EDISPU";
+
+    function verify() {
+      const userKey = document.getElementById("key").value
+        .trim()
+        .toUpperCase();
+
+      const decoded = hidden
+        .split("")
+        .reverse()
+        .join("")
+        .replace(" ", "");
+
+      if (userKey === decoded) {
+        document.body.innerHTML = `
+          <div style="color:#0f0;text-align:center;">
+            <h1>ROUND 1 COMPLETED</h1>
+            <p>You escaped the Upside Down.</p>
+          </div>
+        `;
+      } else {
+        document.getElementById("msg").innerText =
+          "The gate remains sealed...";
+      }
+    }
+  </script>
+
+  <!-- Not everything is meant to be read normally -->
+</body>
+</html>

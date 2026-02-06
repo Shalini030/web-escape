@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Web Escape | Page 7</title>
+
+<style>
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Courier New', monospace;
+}
+
+body {
+  height: 100vh;
+  background: url("./images/page7\ bg.png") no-repeat center/cover;
+  overflow: hidden;
+  position: relative;
+}
+
+/* DARK OVERLAY */
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.65);
+}
+
+/* STORY */
+.story {
+  position: absolute;
+  top: 8%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70%;
+ 
+  padding: 20px;
+  text-align: center;
+  color: #e6f7ff;
+  z-index: 3;
+}
+
+.story h1 {
+  color: #00ccff;
+  margin-bottom: 10px;
+}
+
+/* TANK AREA */
+.tank {
+  position: absolute;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 420px;
+  height: 220px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+/* WATER RIPPLE (BUGGED) */
+.ripples {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center,
+    rgba(0,200,255,0.6),
+    transparent 60%);
+  animation: ripple 2s infinite;
+  opacity: 0;   /* ❌ BUG */
+}
+
+/* PORTAL (BUGGED) */
+.portal {
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: #00ccff;
+  box-shadow: 0 0 25px #00ccff, 0 0 50px #00ffff;
+  animation: pulse 1.5s infinite;
+  opacity: 0;   /* ❌ BUG */
+}
+
+@keyframes ripple {
+  from { transform: scale(1); opacity: 0.4; }
+  to { transform: scale(1.2); opacity: 0.8; }
+}
+
+@keyframes pulse {
+  from { transform: translate(-50%, -50%) scale(0.8); }
+  to { transform: translate(-50%, -50%) scale(1.2); }
+}
+
+/* ESCAPE BUTTON */
+.escape {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 12px 35px;
+  background: #00ccff;
+  color: black;
+  text-decoration: none;
+  font-size: 18px;
+  border-radius: 6px;
+  opacity: 0.2;
+  pointer-events: none;
+  transition: 0.5s;
+}
+
+/* ESCAPE UNLOCKED */
+body.connected .escape {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* HINT */
+.hint {
+  position: absolute;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #aaa;
+  font-size: 14px;
+  opacity: 0.8;
+}
+</style>
+</head>
+
+<body>
+
+<div class="overlay"></div>
+
+<div class="story">
+  <h1>Eleven’s Connection</h1>
+  <p>
+    The tank is silent.  
+    Eleven’s voice whispers through the void:  
+    <br><br>
+    <em>“I’m here… but you can’t see me yet.”</em>
+  </p>
+</div>
+
+<!-- TANK -->
+<div class="tank">
+  <div class="ripples"></div>
+  <div class="portal"></div>
+</div>
+
+<p class="hint">
+  Some things exist… even when they’re hidden.
+</p>
+
+<a href="page8.html" class="escape">CONNECT</a>
+
+<script>
+/* CHECK FIX */
+setInterval(() => {
+  const ripple = getComputedStyle(document.querySelector('.ripples')).opacity;
+  const portal = getComputedStyle(document.querySelector('.portal')).opacity;
+
+  if (ripple !== "0" && portal !== "0") {
+    document.body.classList.add("connected");
+  }
+}, 500);
+</script>
+
+</body>
+</html>

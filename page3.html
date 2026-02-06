@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Web Escape | Hawkins Lab</title>
+
+<style>
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Courier New", monospace;
+}
+
+/* BACKGROUND & LAYOUT */
+body {
+  min-height: 100vh;
+  background: url("./images/page3 bg.png") no-repeat center center/cover;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #fff;
+  padding-top: 120px;
+}
+
+/* DARK OVERLAY */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.65);
+  z-index: 0;
+}
+
+/* STORY BOX */
+.story {
+  background: rgba(0,0,0,0.75);
+  border: 2px solid crimson;
+  padding: 20px 30px;
+  text-align: center;
+  margin-bottom: 40px;
+  max-width: 600px;
+  z-index: 1;
+}
+
+.story h1 {
+  color: crimson;
+  margin-bottom: 10px;
+}
+
+.story p {
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* PANEL */
+.panel {
+  background: rgba(0,0,0,0.85);
+  border: 2px solid #666;
+  padding: 25px;
+  width: 260px;
+  z-index: 1;
+}
+
+/* DISPLAY */
+.display {
+  height: 45px;
+  background: #000;
+  border: 1px solid #444;
+  margin-bottom: 15px;
+  font-size: 22px;
+  letter-spacing: 6px;
+  text-align: center;
+  line-height: 45px;
+}
+
+/* KEYPAD */
+.keypad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+
+  /* 🔴 ONLY BUG IN THIS PAGE 🔴 */
+  pointer-events: none;
+  opacity: 0.4;
+}
+
+.keypad button {
+  padding: 12px;
+  font-size: 18px;
+  background: #111;
+  color: #fff;
+  border: 1px solid #444;
+  cursor: pointer;
+}
+
+/* ESCAPE BUTTON */
+.escape {
+  margin-top: 20px;
+  display: block;
+  text-align: center;
+  padding: 12px;
+  background: crimson;
+  color: #fff;
+  text-decoration: none;
+  letter-spacing: 2px;
+  opacity: 0.3;
+  pointer-events: none;
+  transition: 0.3s;
+}
+
+
+</style>
+</head>
+
+<body>
+
+<div class="overlay"></div>
+
+<!-- STORY -->
+<div class="story">
+  <h1>Hawkins National Laboratory</h1>
+  <p>
+    You are trapped inside the laboratory.  
+    A malfunctioning security keypad blocks the exit.
+    <br><br>
+    Dr. Brenner’s note reads:
+    <br><br>
+    <strong>“Code is 1-1-8-3.”</strong>
+    <br><br>
+    The system refuses to accept any input.
+  </p>
+</div>
+
+<!-- KEYPAD PANEL -->
+<div class="panel">
+  <div class="display" id="display"></div>
+
+  <div class="keypad">
+    <button onclick="press(1)">1</button>
+    <button onclick="press(2)">2</button>
+    <button onclick="press(3)">3</button>
+    <button onclick="press(4)">4</button>
+    <button onclick="press(5)">5</button>
+    <button onclick="press(6)">6</button>
+    <button onclick="press(7)">7</button>
+    <button onclick="press(8)">8</button>
+    <button onclick="press(9)">9</button>
+    <button onclick="backspace()">⌫</button>
+  </div>
+
+  <a href="page4.html" class="escape" id="escape">ESCAPE</a>
+</div>
+
+<!-- JAVASCRIPT (WORKING, NOT A BUG) -->
+<script>
+let input = "";
+const correctCode = "1183";
+
+function press(num) {
+  if (input.length < 4) {
+    input += num;
+    document.getElementById("display").innerText = input;
+
+    if (input === correctCode) {
+      document.getElementById("escape").style.opacity = "1";
+      document.getElementById("escape").style.pointerEvents = "auto";
+    }
+  }
+}
+
+function backspace() {
+  input = input.slice(0, -1);
+  document.getElementById("display").innerText = input;
+}
+</script>
+
+</body>
+</html>

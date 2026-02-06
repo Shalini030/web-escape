@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Web Escape | Page 4</title>
+
+  <style>
+    /* RESET */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Courier New', monospace;
+    }
+
+    body {
+      height: 100vh;
+      background: url("./images/page4\ bg.png") no-repeat center center/cover;
+      overflow: hidden;
+      position: relative;
+      color: #fff;
+    }
+
+    /* DARK OVERLAY */
+    .overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 1;
+    }
+
+    /* STORY BOX */
+    .story-box {
+      position: absolute;
+      top: 50px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 70%;
+      padding: 20px;
+      text-align: center;
+      z-index: 2;
+    }
+
+    .story-box h1 {
+      color: #f5c542;
+      margin-bottom: 10px;
+    }
+
+    .hint {
+      margin-top: 10px;
+      font-size: 14px;
+      opacity: 0.85;
+      color: #ffd966;
+    }
+
+    /* MAP CONTAINER */
+    .map {
+      position: absolute;
+      bottom: 120px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 40px;
+      z-index: 2;
+    }
+
+    .location {
+      width: 120px;
+      height: 120px;
+      border: 2px dashed #aaa;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0.25;
+      transition: 0.3s;
+    }
+
+    /* WHEN BUG IS FIXED */
+    .location.active {
+      opacity: 1;
+      border-color: #00ff99;
+      box-shadow: 0 0 15px #00ff99;
+    }
+
+    /* ESCAPE BUTTON */
+    .escape {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 14px 35px;
+      font-size: 18px;
+      background: red;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      opacity: 0.3;
+      pointer-events: none; /* BUG LOCK */
+      z-index: 2;
+    }
+
+    .escape.unlocked {
+      opacity: 1;
+      pointer-events: auto;
+      box-shadow: 0 0 20px red;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="overlay"></div>
+
+  <!-- STORY -->
+  <div class="story-box">
+    <h1>Will's Hideout</h1>
+    <p>
+      You find Will’s secret fort hidden deep in the woods.  
+      His drawing shows a path—but parts are missing.
+    </p>
+    <p class="hint">
+      Mike whispers: “The map shows three locations — find them all.”
+    </p>
+    <p class="hint">
+      🛠️ “The map isn’t broken… it’s being told not to speak.”
+    </p>
+  </div>
+
+  <!-- MAP -->
+  <div class="map">
+
+    <!-- BUG 1: COMMENTED LOCATION -->
+    <!-- <div class="location active">Castle</div> -->
+
+    <!-- BUG 2: COMMENTED LOCATION -->
+    <!-- <div class="location active">Radio Tower</div> -->
+
+    <!-- BUG 3: COMMENTED LOCATION -->
+    <!-- <div class="location active">Creek</div> -->
+
+  </div>
+
+  <!-- ESCAPE -->
+  <a href="page5.html" class="escape" id="escapeBtn">FOLLOW THE PATH</a>
+
+  <script>
+    // CHECK IF ALL LOCATIONS ARE UNCOMMENTED
+    const checkInterval = setInterval(() => {
+      const activeLocations = document.querySelectorAll('.location.active');
+
+      if (activeLocations.length === 3) {
+        document.getElementById('escapeBtn').classList.add('unlocked');
+        clearInterval(checkInterval);
+      }
+    }, 500);
+  </script>
+
+</body>
+</html>

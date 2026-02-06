@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Page 6 Dustin’s Radio</title>
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: url("./images/page6\ bg.png") no-repeat center/cover;
+      font-family: "Courier New", monospace;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #f70612;
+      
+    }
+
+    .container {
+      width: 650px;
+      padding: 30px;
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 10px;
+      letter-spacing: 1px;
+    }
+
+    .story {
+      margin-bottom: 20px;
+      font-size: 16px;
+      background-color: rgb(196, 235, 236);
+      width:88%;
+    }
+
+    .radio {
+      
+      padding: 20px;
+    }
+
+    /*.screen {
+      background: black;
+      padding: 15px;
+      margin-bottom: 20px;
+      width:80%;
+    }*/
+
+    /* ❌ BUG 1 — Transmission hidden */
+    #transmission {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    /* ❌ BUG 2 — Frequency controls hidden */
+    .controls {
+      display: none;
+    }
+
+    .knob {
+      border: 1px solid #e50914;
+      padding: 10px;
+      margin: 8px;
+    }
+
+    .hint {
+      margin-top: 15px;
+      font-style: italic;
+      color: #aaa;
+    }
+
+    button {
+      margin-top: 25px;
+      padding: 10px 25px;
+      background: #e50914;
+      color: black;
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:disabled {
+      background: #555;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <h1> Dustin’s Radio </h1>
+
+    <p class="story">
+      Static bursts through the radio.<br>
+      Dustin’s voice struggles to break through:<br>
+      <em>“The signal isn’t gone… you just need to tune it.”</em>
+    </p>
+
+    <div class="radio">
+
+      <div class="screen">
+        <p id="transmission">
+          🎙️ “You got it! The path is clear — move north!”
+        </p>
+      </div>
+
+      <div class="controls">
+        <div class="knob">Frequency A</div>
+        <div class="knob">Frequency B</div>
+        <div class="knob">Frequency C</div>
+      </div>
+
+    </div>
+
+    <p class="hint">
+      Hint: Some signals are muted, not missing.
+    </p>
+     
+    <a href="page7.html" id="nextLink" style="pointer-events:none; text-decoration:none;">
+    <button id="nextBtn" disabled>Go to Page 7 ➜</button>
+    </a>
+
+    
+    
+  </div>
+
+  <script>
+    // JS ONLY CHECKS FIX — NO BUG HERE
+    const knobs = document.querySelectorAll(".knob");
+    const transmission = document.getElementById("transmission");
+    const nextBtn = document.getElementById("nextBtn");
+
+    function checkFix() {
+      const knobsVisible = [...knobs].every(knob =>
+        getComputedStyle(knob).display !== "none"
+      );
+
+      const messageVisible =
+        getComputedStyle(transmission).opacity === "1" &&
+        getComputedStyle(transmission).visibility === "visible";
+
+      if (knobsVisible && messageVisible) {
+        nextBtn.disabled = false;
+        document.getElementById("nextLink").style.pointerEvents = "auto";
+      }
+    }
+
+    setInterval(checkFix, 1000);
+  </script>
+
+</body>
+</html>

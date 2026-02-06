@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Web Escape | Page 9 – Hopper's Cabin</title>
+
+  <style>
+    /* RESET */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Courier New", monospace;
+    }
+
+    body {
+      height: 100vh;
+      background: url("./images/page9\ bg.png") no-repeat center center/cover;
+      overflow: hidden;
+      color: #fff;
+    }
+
+    /* DARK MOOD OVERLAY */
+    .overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.55);
+      z-index: 1;
+    }
+
+    /* STORY BOX */
+    .story {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 60%;
+      padding: 25px;
+      text-align: center;
+      z-index: 2;
+    }
+
+    .story h1 {
+      color: #ffb000;
+      margin-bottom: 15px;
+    }
+
+    .hint {
+      margin-top: 10px;
+      font-size: 14px;
+      opacity: 0.75;
+    }
+
+    /* WAFFLE BOXES (BUGS) */
+    .waffle {
+      position: absolute;
+      width: 80px;
+      opacity: 0; /* BUG: HIDDEN */
+      transition: 0.3s;
+      z-index: 2;
+    }
+
+    /* RANDOM POSITIONS */
+    .w1 { top: 18%; left: 15%; }
+    .w2 { bottom: 12%; right: 20%; }
+    .w3 { top: 12%; right: 35%; }
+
+    /* NEXT BUTTON */
+    .next {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 12px 30px;
+      background: #ff0000;
+      color: white;
+      text-decoration: none;
+      font-size: 18px;
+      letter-spacing: 2px;
+      border-radius: 5px;
+      opacity: 0.3;
+      pointer-events: none; /* LOCKED */
+      z-index: 2;
+    }
+
+    .next.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="overlay"></div>
+
+  <!-- STORY -->
+  <div class="story">
+    <h1>Hopper’s Hidden Cabin</h1>
+    <p>
+      You finally reach Hopper’s cabin.  
+      Eleven has been here before you.  
+      Eggo waffles were left behind — not on the floor,  
+      but hidden in places you’d only notice if you *look closely at the code*.
+    </p>
+    <p class="hint">
+      Not everything meant to be seen is visible by default.
+    </p>
+  </div>
+
+  <!-- WAFFLES -->
+  <img src="./images/waffle.png" class="waffle w1" id="w1">
+  <img src="./images/waffle.png" class="waffle w2" id="w2">
+  <img src="./images/waffle.png" class="waffle w3" id="w3">
+
+  <!-- NEXT PAGE -->
+  <a href="page10.html" class="next" id="nextBtn">ENTER THE CABIN</a>
+
+  <script>
+    // CHECK IF ALL WAFFLES ARE VISIBLE
+    const waffles = document.querySelectorAll(".waffle");
+    const nextBtn = document.getElementById("nextBtn");
+
+    function checkWaffles() {
+      let visibleCount = 0;
+
+      waffles.forEach(w => {
+        if (getComputedStyle(w).opacity === "1") {
+          visibleCount++;
+        }
+      });
+
+      if (visibleCount === 3) {
+        nextBtn.classList.add("active");
+      }
+    }
+
+    setInterval(checkWaffles, 500);
+  </script>
+
+</body>
+</html>

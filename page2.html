@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Web Escape | Page 2</title>
+
+  <style>
+    /* RESET */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Courier New", monospace;
+    }
+
+    body {
+      height: 100vh;
+      overflow: hidden;
+      background: black;
+      transform:rotate(180deg)
+    }
+
+    /* =========================
+       UPSIDE DOWN WORLD (BUG)
+       ========================= */
+    .world {
+      width: 100%;
+      height: 100%;
+      background: url("./images/page2 bg.png") no-repeat center center/cover;
+
+      /* 🔴 ONLY BUG IN THIS PAGE */
+      
+
+      position: relative;
+    }
+
+    /* Dark overlay (for vibe, NOT a bug) */
+    .overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      pointer-events: none;
+    }
+
+    /* STORY BOX */
+    .story {
+      position: absolute;
+      top: 74%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+
+     
+      color: #ff4d4d;
+      padding: 30px 35px;
+      
+      text-align: center;
+      max-width: 520px;
+      z-index: 2;
+    }
+
+    .story h2 {
+      margin-bottom: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .story em {
+      color: #ffd700;
+    }
+
+    /* PORTAL */
+    .portal {
+      position: absolute;
+      bottom: 18%;
+      right: 18%;
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+
+      background: radial-gradient(circle, #000 25%, #4b0082 55%, #8a2be2);
+      box-shadow: 0 0 35px #8a2be2;
+      z-index: 2;
+    }
+
+    /* ESCAPE BUTTON */
+    .escape-btn {
+      position: absolute;
+      bottom: 7%;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 14px 32px;
+      opacity: 0;
+
+      background: #8a2be2;
+      color: white;
+      border: none;
+      font-size: 17px;
+      letter-spacing: 2px;
+      cursor: pointer;
+      z-index: 2;
+    }
+
+    .escape-btn:hover {
+      background: #a855f7;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="world">
+
+    <div class="overlay"></div>
+
+    <div class="story">
+      <h2>The Upside Down</h2>
+      <p>
+        The world feels wrong.  
+        Everything is inverted and dark.
+        <br><br>
+        Eleven’s voice echoes:
+        <br><br>
+        <em>“Turn the world right-side up to find the gate.”</em>
+      </p>
+    </div>
+
+    <div class="portal" title="The Gate"></div>
+
+    <button class="escape-btn" onclick="location.href='page3.html'">
+      ENTER THE GATE
+    </button>
+
+  </div>
+
+</body>
+</html>
