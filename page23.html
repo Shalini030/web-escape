@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Page 23 – Tug of War</title>
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: url("./images/page23 bg.png") center/cover no-repeat;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, sans-serif;
+      color: white;
+      text-align: center;
+    }
+
+    button {
+      padding: 16px 40px;
+      font-size: 20px;
+      background: #c62828;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    #escape {
+      display: none;
+      margin-top: 30px;
+      padding: 12px 25px;
+      background: green;
+      color: white;
+      text-decoration: none;
+      font-size: 18px;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Tug of War</h1>
+  <p>Click fast to generate pulling power.</p>
+
+
+  <button id="pullBTN">PULL!</button>
+
+  <p id="power">Power: 0</p>
+
+  <a href="page24.html" id="escape">ESCAPE</a>
+
+  <script>
+    let power = 0;
+
+    document.getElementById("pullBtn").addEventListener("click", function () {
+      power++;
+      document.getElementById("power").innerText = "Power: " + power;
+
+      if (power === 10) {
+        document.getElementById("escape").style.display = "inline-block";
+      }
+    });
+  </script>
+
+</body>
+</html>

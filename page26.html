@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Page 26 – Front Man’s Office</title>
+
+<style>
+  body {
+    background: url("./images/page26\ bg.png") center/cover no-repeat;
+    color: #eaeaea;
+    font-family: monospace;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  
+
+  button {
+    padding: 12px 25px;
+    margin-top: 20px;
+    background: crimson;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    pointer-events: none;
+  }
+
+  #escape {
+    display: none;
+    margin-top: 30px;
+    padding: 12px 25px;
+    background: green;
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+  }
+</style>
+</head>
+
+<body>
+
+<div class="panel">
+  <h2>Encrypted Files</h2>
+  <p>Decrypt the Front Man’s data.</p>
+
+  <!-- ❌ BUG IS HERE -->
+  <button id="decryptBtn" data-key="front-man">
+    Decrypt Files
+  </button>
+
+  <p id="status"></p>
+
+  <a id="escape" href="page27.html">ACCESS GRANTED</a>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+
+    const btn = document.getElementById("decryptBtn");
+    const status = document.getElementById("status");
+    const escape = document.getElementById("escape");
+
+    btn.addEventListener("click", () => {
+      const key = btn.dataset.key;
+
+      if (key === "frontman") {
+        status.textContent = "Decryption successful.";
+        escape.style.display = "inline-block";
+      } else {
+        status.textContent = "Invalid key.";
+      }
+    });
+
+  });
+</script>
+
+</body>
+</html>

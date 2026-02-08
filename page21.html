@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Red Light Green Light</title>
+
+  <style>
+    body {
+      height: 100vh;
+      background: url("./images/page21 bg.jpg") no-repeat center/cover;
+      color: rgb(4, 4, 4);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, sans-serif;
+      gap: 20px;
+    }
+
+    #light {
+      font-size: 26px;
+      font-weight: bold;
+      padding: 15px 30px;
+      border-radius: 10px;
+    }
+
+    .red { background: red; }
+    .green { background: green; }
+
+    button {
+      padding: 12px 25px;
+      font-size: 18px;
+      cursor: pointer;
+      border-radius: 8px;
+      border: none;
+      display:none;
+    }
+
+    #escapeBtn {
+      display: none;
+      background: gold;
+      color: black;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Red Light 🚦 Green Light</h1>
+
+  <div id="light" class="red">RED LIGHT</div>
+
+  <button id="moveBTN">MOVE</button>
+  <button id="escapeBtn">ESCAPE</button>
+
+  <script>
+    let isGreenLight = false;
+
+    const light = document.getElementById("light");
+    const moveBtn = document.getElementById("moveBtn");
+    const escapeBtn = document.getElementById("escapeBtn");
+
+    // Toggle light
+    setInterval(() => {
+      isGreenLight = !isGreenLight;
+
+      light.textContent = isGreenLight ? "GREEN LIGHT" : "RED LIGHT";
+      light.className = isGreenLight ? "green" : "red";
+    }, 3000);
+
+    moveBtn.addEventListener("click", () => {
+      if (!isGreenLight) {
+        alert("💀 You moved on RED! Eliminated.");
+        return;
+      }
+
+      alert("✅ You moved safely!");
+      escapeBtn.style.display = "inline-block";
+    });
+
+    escapeBtn.addEventListener("click", () => {
+      alert("🎉 You escaped!");
+      window.location.href = "page22.html"; // ✅ CORRECT navigation
+    });
+  </script>
+
+</body>
+</html>

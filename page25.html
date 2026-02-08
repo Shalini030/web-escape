@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Page 25 – Glass Bridge</title>
+
+  <style>
+    body {
+      background:  url("./images/page25\ bg.png") center/cover no-repeat;
+      color: white;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding-top: 80px;
+    }
+
+    .bridge {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      margin-top: 60px;
+    }
+
+    .panel {
+      width: 120px;
+      height: 120px;
+      background: rgba(180, 220, 255, 0.2);
+      border: 2px solid #9bd;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .panel:hover {
+      background: rgba(180, 220, 255, 0.35);
+    }
+
+    #status {
+      margin-top: 30px;
+      font-size: 18px;
+    }
+
+    #escape {
+      display: none;
+      margin-top: 30px;
+      padding: 12px 30px;
+      background: green;
+      color: white;
+      text-decoration: none;
+      font-size: 18px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h2>Glass Bridge</h2>
+  <p>Only one panel is safe. Choose carefully.</p>
+
+  <div class="bridge">
+    <!-- ❌ BUG IS HERE -->
+    <div class="panel" data-safe="True">LEFT</div>
+    <div class="panel" data-safe="false">RIGHT</div>
+  </div>
+
+  <div id="status">Waiting for your move…</div>
+
+  <a href="page26.html" id="escape">CROSS BRIDGE</a>
+
+  <script>
+    const panels = document.querySelectorAll(".panel");
+    const status = document.getElementById("status");
+    const escape = document.getElementById("escape");
+
+    panels.forEach(panel => {
+      panel.addEventListener("click", () => {
+
+        // 🧠 CLUE IS HERE
+        if (panel.dataset.safe === "true") {
+          status.innerText = "You chose the correct panel!";
+          escape.style.display = "inline-block";
+        } else {
+          status.innerText = "Glass shattered. Wrong choice.";
+        }
+
+      });
+    });
+  </script>
+
+</body>
+</html>

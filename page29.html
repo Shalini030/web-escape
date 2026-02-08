@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Page 29 – The Game Master</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+  body {
+    margin: 0;
+    background: url("./images/page27\ bg.png") center/cover no-repeat;
+    color: #fff;
+    font-family: monospace;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  .master-panel {
+    width: 420px;
+    padding: 30px;
+    background: #120a0a;
+    border-radius: 14px;
+    text-align: center;
+    opacity:0.6
+  }
+
+  h1 {
+    margin-bottom: 12px;
+    color: crimson;
+    letter-spacing: 2px;
+  }
+
+  .rule {
+    font-size: 14px;
+    opacity: 0.85;
+    margin-bottom: 22px;
+  }
+
+  input {
+    width: 100%;
+    padding: 12px;
+    margin: 12px 0;
+    background: #111;
+    color: #0f0;
+    border: 1px solid #333;
+    border-radius: 8px;
+    font-size: 15px;
+
+    /* ❌ BUG 2 (HTML-related): input visually enabled but actually disabled */
+    pointer-events: none;
+  }
+
+  button {
+    margin-top: 20px;
+    padding: 12px;
+    width: 100%;
+    background: crimson;
+    border: none;
+    color: #fff;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+
+    pointer-events: auto;
+  }
+
+  .hint {
+    font-size: 12px;
+    opacity: 0.6;
+    margin-top: 18px;
+  }
+</style>
+</head>
+
+<body>
+
+<div class="master-panel">
+  <h1>GAME MASTER</h1>
+
+  <div class="rule">
+    “The correct password satisfies all rules…<br>
+    but not in the way you expect.”
+  </div>
+
+  /*
+      Conditions (all must pass):
+      1. Length must be exactly 4
+      2. Password must NOT include "0"
+      3. Password must be numeric but treated as string
+    */
+
+  <!-- ❌ BUG 1 (HTML): wrong input type for string checks -->
+  <input type="number" id="password" placeholder="Enter Password">
+
+  <button id="submitBtn">DECODE</button>
+
+  <div class="hint">
+    Hint: Length matters. Order matters. Truth lies inverted.
+  </div>
+</div>
+
+<script>
+  const btn = document.getElementById('submitBtn');
+  const input = document.getElementById('password');
+
+  btn.addEventListener('click', () => {
+    const value = input.value;
+
+    if (
+      value.length === 4 &&
+      !value.includes("0") &&
+      Number(value) > 1000
+    ) {
+      alert("Access Granted. Game Master defeated.");
+      window.location.href = "page30.html";
+    } else {
+      alert("Access Denied. Think again.");
+    }
+  });
+</script>
+
+</body>
+</html>

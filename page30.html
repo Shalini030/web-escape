@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Page 30 – Freedom</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+  body {
+    margin: 0;
+    background:  url("./images/page30\ bg.png") center/cover no-repeat;
+    color: #eaffea;
+    font-family: monospace;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  .freedom-panel {
+    width: 480px;
+    padding: 36px;
+    border-radius: 16px;
+    text-align: center;
+    background-color:rgb(8, 5, 5) ;
+    opacity: 0.5;
+    
+  }
+
+  h1 {
+    color: #00ff99;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+  }
+
+  .lock {
+    display: flex;
+    justify-content: space-between;
+    margin: 30px 0;
+  }
+
+  input { 
+    width: 30%;
+    padding: 14px;
+    font-size: 20px;
+    text-align: center;
+    background: #000;
+    color: #00ff99;
+    border: 1px solid #00ff99;
+    border-radius: 8px;
+  }
+
+  /* ❌ BUG 2 (CSS): middle digit is invisible */
+  #digit2 {
+    opacity: 0;
+  }
+
+  button {
+    width: 100%;
+    padding: 14px;
+    font-size: 16px;
+    background: #00ff99;
+    color: #000;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+
+  .hint {
+    margin-top: 18px;
+    font-size: 13px;
+    opacity: 1;
+  }
+</style>
+</head>
+
+<body>
+
+<div class="freedom-panel">
+  <h1>FINAL DOOR</h1>
+
+  <div class="hint">
+    “Three digits. One escape.  
+    What you don’t see matters most.”
+  </div>
+
+  <div class="lock">
+    <!-- ❌ BUG 1 (HTML): wrong input type -->
+    <input type="number" id="digit1" maxlength="1" placeholder="•">
+
+    <!-- ❌ BUG 2 (CSS): opacity 0 hides this digit -->
+    <input type="text" id="digit2" maxlength="1" placeholder="•">
+
+    <!-- ❌ BUG 3 (HTML + CSS mismatch): ID typo -->
+    <input type="text" id="digti3" maxlength="1" placeholder="•">
+  </div>
+
+  <button id="unlockBtn">UNLOCK FREEDOM</button>
+
+  <div class="hint">
+    Hint: Visibility is deception. Names matter.
+  </div>
+</div>
+
+<script>
+  const btn = document.getElementById('unlockBtn');
+
+  btn.addEventListener('click', () => {
+    const d1 = document.getElementById('digit1').value;
+    const d2 = document.getElementById('digit2').value;
+    const d3 = document.getElementById('digit3').value;
+
+    /*
+      Correct code: 7 4 2
+    */
+
+    if (d1 === "7" && d2 === "4" && d3 === "2") {
+      alert("You escaped. Freedom is yours.");
+      document.body.innerHTML =
+        "<h1 style='color:#00ff99;text-align:center;'>FREEDOM ACHIEVED 🕊️</h1>";
+    } else {
+      alert("The door refuses to open.");
+    }
+  });
+</script>
+
+</body>
+</html>

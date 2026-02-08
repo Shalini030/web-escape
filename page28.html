@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Squid Game Arena - With Typo & Z-Index Bug</title>
+<style>
+
+  body {
+  margin: 0;
+  min-height: 100vh;
+  background: url("./images/page28\ bg.webp") center/cover no-repeat;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  }
+
+  #squid-arena {
+    width: 350px;
+    height: 450px;
+    background: #222;
+    position: relative;
+    margin: 100px auto;
+    border-radius: 15px;
+
+  }
+  .squid-part {
+    position:absolute;
+    background: rgba(255, 0, 0, 0.7);
+    border: 2px solid #ff4444;
+    width: 90px;
+    height: 90px;
+    cursor: pointer;
+    display: flex;
+    justify-content:center;
+    align-items:center;
+    color: white;
+    font-size: 36px;
+    border-radius: 15px;
+    user-select: none;
+    transition: background 0.3s ease;
+    margin-left: 10px;
+  }
+  .squid-part:hover {
+    background: rgba(255, 0, 0, 1);
+  }
+
+  .head {
+    top: 30px;
+    left: 130px;
+    border-radius: 50% 50% 40% 40%;
+    width: 110px;
+    height: 110px;
+    background: rgba(0, 200, 0, 0.8);
+    border-color: #44ff44;
+    z-index: 4;
+  }
+  .body {
+    top: 150px;
+    left: 90px;
+    width: 80px;
+    height: 110px;
+    border-radius: 24px;
+    z-index: 3;
+    
+    
+  }
+  .left-leg {
+    top: 290px;
+    left: 90px;
+    width: 80px;
+    height: 110px;
+    border-radius: 24px;
+    z-index: 1; /* BUG: same as right-leg */
+  }
+  .right-leg {
+    top: 290px;
+     /* Overlaps with left-leg */
+    width: 80px;
+    height: 110px;
+    border-radius: 24px;
+    z-index: 1; /* BUG: same as left-leg */
+  }
+</style>
+</head>
+<body>
+
+<div id="squid-arena">
+  <div class="squid-part left-leg" data-stpe="1"> <!-- BUG: typo data-stpe -->
+    🦑
+  </div>
+  <div class="squid-part right-leg" data-step="2">
+    🦑
+  </div>
+  <div class="squid-part body" data-step="3">
+    🦑
+  </div>
+  <div class="squid-part head" data-step="4">
+    🏆
+  </div>
+</div>
+
+<script>
+  const arena = document.getElementById('squid-arena');
+  let currentStep = 1;
+
+  arena.addEventListener('click', (event) => {
+    const part = event.target.closest('.squid-part');
+    if (!part) return;
+
+    const step = part.getAttribute('data-step');
+    if (!step) {
+      alert('Oops! This part is not recognized (maybe typo in attribute).');
+      return;
+    }
+
+    if (parseInt(step) === currentStep) {
+      alert(`Step ${step} correct!`);
+      currentStep++;
+    } else {
+      alert(`Wrong step! Expected step ${currentStep}, but clicked ${step}.`);
+    }
+
+    if (currentStep > 4) {
+      alert('You reached the head and won!');
+      window.location.href = 'page29.html'; // Redirect to next page
+    }
+  });
+</script>
+
+</body>
+</html>
